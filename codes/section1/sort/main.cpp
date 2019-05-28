@@ -3,15 +3,16 @@
 #include <stdlib.h>
 #include <time.h>
 
-#define N 10
-short sort[N];
+#define N 100000
+int sort[N];
 
-void BubbleSort(void){
-    short i, j, flag;
+void BubbleSort(){
+    int i, j, flag, k;
 
+    k = 0;
     do{
         flag = 0;
-        for(i = 0; i < N - 1; i++){
+        for(i = 0; i < N-1-k; i++){
             if(sort[i] > sort[i+1]){
                 flag = 1;
                 j = sort[i];
@@ -19,12 +20,13 @@ void BubbleSort(void){
                 sort[i+1] = j;
             }
         }
+        k++;
     } while (flag == 1);
 }
 
 int main() {
-    short i;
-    srand((unsigned short)time(NULL));
+    int i;
+    srand((unsigned int)time(NULL));
 
     printf("Prepare for sort: \n");
     for(i = 0; i < N; i++){
