@@ -8,6 +8,28 @@
 int sort[N];// = {9,7,6,2,8,1,4,3,5,10};
 int buffer[N];
 
+void CombSort(void){
+    int i, temp, flag, gap;
+    gap = N;
+    do{
+        gap = (gap * 10) / 13;
+        if(gap == 0){
+            gap = 1;
+        }
+
+        flag = 1;
+
+        for(i = 0;i < N - gap;i++){
+            if (sort[i] > sort[i+gap]){
+                flag = 0;
+                temp = sort[i];
+                sort[i] = sort[i + gap];
+                sort[i + gap] = temp;
+            }
+        }
+    } while ((gap> 1) || flag != 1);
+}
+
 void MergeSort(int n, int x[]){
     int i, j, k, m;
 
@@ -31,24 +53,6 @@ void MergeSort(int n, int x[]){
     while(i < m){
         x[k++] = buffer[i++];
     }
-}
-
-void BubbleSort(){
-    int i, j, flag, k;
-
-    k = 0;
-    do{
-        flag = 0;
-        for(i = 0; i < N-1-k; i++){
-            if(sort[i] > sort[i+1]){
-                flag = 1;
-                j = sort[i];
-                sort[i] = sort[i+1];
-                sort[i+1] = j;
-            }
-        }
-        k++;
-    } while (flag == 1);
 }
 
 void QuickSort(int bottom, int top, int *data){
@@ -78,6 +82,24 @@ void QuickSort(int bottom, int top, int *data){
     QuickSort(upper+1, top, data);
 }
 
+void BubbleSort(){
+    int i, j, flag, k;
+
+    k = 0;
+    do{
+        flag = 0;
+        for(i = 0; i < N-1-k; i++){
+            if(sort[i] > sort[i+1]){
+                flag = 1;
+                j = sort[i];
+                sort[i] = sort[i+1];
+                sort[i+1] = j;
+            }
+        }
+        k++;
+    } while (flag == 1);
+}
+
 void print(){
     for(int i = 0; i < N; i++){
         printf("%d ", sort[i]);
@@ -99,6 +121,7 @@ int main() {
     //BubbleSort();
     //QuickSort(0, N-1, sort);
     MergeSort(N, sort);
+    //CombSort();
     end = std::chrono::system_clock::now();  // 計測終了時間
     double elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(end-start).count();
     //print();
