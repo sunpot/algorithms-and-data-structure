@@ -4,6 +4,56 @@
 
 #include "Algos.h"
 
+void Algos::BinaryInsertSort(int n, int *data) {
+    int i, sorted, temp, insert;
+    int left, mid, right;
+
+    for(sorted = 1; sorted < n; sorted++){
+        insert = data[sorted];
+
+        left = 0;
+        right = sorted;
+        while(left < right) {
+            mid = (left + right)/2;
+
+            if(data[mid] < insert) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+            i = left;
+        }
+
+        while(i <= sorted){
+            temp = data[i];
+            data[i] = insert;
+            insert = temp;
+            i++;
+        }
+    }
+}
+
+void Algos::InsertSort(int n, int *sort) {
+    int i, sorted, temp, insert;
+
+    for(sorted = 1; sorted < n; sorted++){
+        insert = sort[sorted];
+
+        for(i = 0; i <= sorted; i++){
+            if(sort[i] > insert){
+                break;
+            }
+        }
+
+        while(i <= sorted){
+            temp = sort[i];
+            sort[i] = insert;
+            insert = temp;
+            i++;
+        }
+    }
+}
+
 void Algos::CombSort(int n, int *data){
     int i, temp, flag, gap;
     gap = n;

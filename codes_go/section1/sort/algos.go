@@ -1,5 +1,76 @@
 package main
 
+func BinaryInsertSort(n int, tmp *[]int) {
+	data := *tmp
+	for sorted := 1; sorted < n; sorted++ {
+		insert := data[sorted]
+		i := 0
+
+		left := 0
+		right := sorted
+		for left < right {
+			mid := (left + right) / 2
+			if data[mid] < insert {
+				left = mid + 1
+			} else {
+				right = mid
+			}
+			i = left
+		}
+
+		for i <= sorted {
+			temp := data[i]
+			data[i] = insert
+			insert = temp
+			i++
+		}
+	}
+}
+
+func InsertSort(n int, tmp *[]int) {
+	data := *tmp
+	for sorted := 1; sorted < n; sorted++ {
+		insert := data[sorted]
+		i := 0
+		for ; i <= sorted; i++ {
+			if data[i] > insert {
+				break
+			}
+		}
+
+		for i <= sorted {
+			temp := data[i]
+			data[i] = insert
+			insert = temp
+			i++
+		}
+	}
+}
+
+func CombSort(n int, data *[]int) {
+	gap := n
+	sort := *data
+	for {
+		gap = (gap * 10) / 13
+		if gap == 0 {
+			gap = 1
+		}
+
+		flag := 1
+		for i := 0; i < n-gap; i++ {
+			if sort[i] > sort[i+gap] {
+				flag = 0
+				temp := sort[i]
+				sort[i] = sort[i+gap]
+				sort[i+gap] = temp
+			}
+		}
+		if !(gap > 1 || flag != 1) {
+			break
+		}
+	}
+}
+
 func MergeSort(n int, x *[]int) {
 	var buffer []int
 	data := *x
